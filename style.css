@@ -1,0 +1,304 @@
+/* 기본 레이아웃 */
+body { font-family: 'Pretendard', sans-serif; background: #1a1a1a; color: #eee; text-align: center; }
+.header { display: flex; align-items: center; gap: 10px; padding: 20px; background: #333; overflow-x: auto; }
+button { padding: 10px 20px; cursor: pointer; border: none; border-radius: 5px; background: #444; color: white; }
+button:hover { background: #666; }
+/* .back-btn { background: #2b67c0; margin-left: auto; } 되돌아가기 강조 */
+/* 현재 페이지 표시 */
+.nav-buttons button.active {
+    background-color: #e9e9e9;
+    color: #000;
+}
+
+/* 돌아가기 버튼 강조 (힌트 보는 중일 때) */
+.back-btn.highlight {
+    background-color: #ff4444;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* 카드 디자인 */
+.char-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;}
+.card { border: 1px solid #555; padding: 15px; border-radius: 10px; width: 200px; cursor: pointer; transition: 0.3s; }
+.card:hover { transform: translateY(-5px); border-color: #f1c40f; }
+.char-name {font-size: 14px; color: #00BCD4;}
+.status-badge {
+    font-size: 12px;
+}
+/* 선택되지 않은 나머지 카드들 */
+.card.disabled {
+    opacity: 0.8;
+    filter: grayscale(1);
+    cursor: not-allowed;
+    pointer-events: none; /* 클릭 방지 */
+}
+
+/* 내가 선택한 카드 강조 */
+.card.selected {
+    border: 2px solid #ff4444;
+    background-color: rgba(255, 68, 68, 0.1);
+}
+
+.lock-msg {
+    font-size: 0.8rem;
+    color: #888;
+    display: block;
+    margin-top: 10px;
+}
+
+/* 엔딩 박스 */
+.result-box { background: #2c3e50; padding: 30px; border-radius: 15px; margin: 20px auto; max-width: 500px; }
+
+.last-choice-container {
+    margin-top: 30px;
+    padding: 20px;
+    border: 2px dashed #555;
+    border-radius: 10px;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 10px;
+}
+.nav-buttons {
+    display: flex;
+    gap: 7px;
+}
+.clue-btn { background: #27ae60; color: white; }
+.fail-btn { background: #c0392b; color: white; width: 100%; margin-top: 10px; }
+.divider { margin: 15px 0; color: #888; font-weight: bold; }
+
+/* 범인 알림 스타일 */
+.culprit-alert {
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    padding: 7px;
+    background-color: #4a0000;
+    color: #ff4444;
+    border: 2px solid #ff0000;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+}
+
+/* 시민 알림 스타일 */
+.innocent-alert {
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    padding: 7px;
+    background-color: #002244;
+    color: #44aaff;
+    border: 2px solid #004488;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.char-name.isCulprit{
+        color: #ff4444;
+}
+
+.view {
+    width: 70%;
+    margin: 0 auto;
+}
+
+
+/* 메인 설정 컨테이너 */
+.main-setup {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05); /* 은은한 배경 */
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.main-setup h3 {
+    margin-bottom: 20px;
+    color: #e0e0e0;
+    font-size: 1.1rem;
+}
+
+/* 라디오 버튼 그룹 */
+.radio-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.radio-group label {
+    cursor: pointer;
+    padding: 10px 20px;
+    background: #2a2a2a;
+    border: 2px solid #444;
+    border-radius: 8px;
+    color: #888;
+    transition: all 0.2s ease;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 실제 라디오 인풋은 숨김 */
+.radio-group input[type="radio"] {
+    display: none;
+}
+
+/* 체크되었을 때의 스타일 */
+.radio-group label:has(input:checked) {
+    background: #4a4a4a;
+    border-color: #ff9800; /* 포인트 컬러 */
+    color: #fff;
+    box-shadow: 0 0 10px rgba(255, 152, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+/* 호버 효과 */
+.radio-group label:hover {
+    border-color: #666;
+    background: #333;
+}
+
+/* 시작 버튼 */
+.start-btn {
+    width: 200px;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #ff9800, #e65100);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.start-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(230, 81, 0, 0.4);
+}
+.font-red{color: red;}
+.start-btn:active {
+    transform: scale(0.98);
+}
+
+li.guide-text {
+    text-align: left;
+}
+.report-box {
+    display: flex;
+    flex-direction: column;
+}
+.info-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 14px;
+}
+span.info-label {
+    min-width: 32%;
+    display: block;
+    color: #999;
+}
+span.info-content {
+    display: block;
+}
+    .investigation-area {
+        border: 1px solid #fff;
+        border-radius: 15px;
+    }
+/* --- 모바일 대응 (화면 너비 768px 이하) --- */
+@media screen and (max-width: 768px) {
+    /* 1. 전체적인 여백 조정 */
+    .view {
+        width: 95%; /* 기존 70%에서 확장하여 공간 확보 */
+    }
+
+    /* 2. 헤더 영역: 버튼이 많아질 경우 가로 스크롤 허용 및 크기 조정 */
+    .header {
+        padding: 10px;
+        gap: 5px;
+        justify-content: flex-start;
+    }
+
+    .nav-buttons {
+        gap: 5px;
+        flex-wrap: wrap;
+    }
+
+    button {
+        padding: 8px 12px; /* 버튼 크기를 살짝 줄임 */
+        font-size: 13px;
+    }
+
+    /* 3. 카드 리스트: 모바일에서는 2열 배치를 권장 */
+    .char-list {
+        gap: 10px;
+    }
+
+    .card {
+        width: calc(44% - 20px);
+        /* min-width: 140px; */
+        padding: 14px;
+    }
+
+    /* 4. 메인 설정 및 라디오 버튼 */
+    .radio-group {
+        flex-direction: column; /* 세로로 쌓기 */
+        align-items: center;
+        gap: 10px;
+    }
+
+    .radio-group label {
+        width: 80%; /* 라디오 버튼 너비 확장 */
+        justify-content: center;
+    }
+
+    /* 5. 알림창 너비 조정 */
+    .culprit-alert, .innocent-alert {
+        width: 90%; /* 모바일에서는 더 넓게 */
+    }
+
+    /* 6. 입력 그룹(정답 입력창 등) 세로 배치 */
+    .input-group {
+        flex-direction: column;
+    }
+
+    .input-group input {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* 7. 엔딩 박스 */
+    .result-box {
+        width: 90%;
+        padding: 20px;
+    }
+
+    /* 8. 시작 버튼 크기 조정 */
+    .start-btn {
+        width: 80%;
+        font-size: 1.1rem;
+    }
+
+    .investigation-area {
+        padding: 0 10px 20px;
+        margin: 30px 20px;
+    }
+}
