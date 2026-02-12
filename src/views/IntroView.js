@@ -21,6 +21,7 @@ export const IntroView = (summary, investigation) => `
                 <li class="guide-text">거짓말은 할 수 없습니다. </li>
                 <li class="guide-text">하지만 제공 된 정보를 말하지 않는 것은 가능합니다.</li>
                 <li class="guide-text">누군가가 질문 했을 때, 잘 모르겠다고 말하는 것은 가능합니다.</li>
+                <li class="guide-text">밑줄 친 내용은 사건에 중요한 단서를 제공합니다. 지혜롭게 플레이하세요.</li>
             </ul>
         </div>
         <div class="font-red">* 내용을 모두 숙지하셨다면 다음으로 진행하세요.</div>

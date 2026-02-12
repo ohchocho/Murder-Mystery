@@ -5,9 +5,13 @@ export const GameView = ({ title, content, story1, story2, story3, story4, img, 
             ${img ? `<img src="${img}" class="clue-img">` : ''}
             <div class="content-box">
                 <p>${content}</p>
+                <br>
                 ${story1 ? `<p>${story1}</p>` : ''}
+                <br>
                 ${story2 ? `<p>${story2}</p>` : ''}
+                <br>
                 ${story3 ? `<p>${story3}</p>` : ''}
+                <br>
                 ${story4 ? `<p>${story4}</p>` : ''}
             </div>
 
