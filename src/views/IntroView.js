@@ -17,6 +17,7 @@ export const IntroView = (summary, investigation) => `
 
 
         <div class="action-area">
+            <h2> 게임 규칙 </h2>
             <ul>
                 <li class="guide-text">거짓말은 할 수 없습니다. </li>
                 <li class="guide-text">하지만 제공 된 정보를 말하지 않는 것은 가능합니다.</li>

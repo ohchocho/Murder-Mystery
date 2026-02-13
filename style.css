@@ -13,7 +13,7 @@ main#app {
     background-color: #e9e9e9;
     color: #000;
 }
-
+.font-gray{color: #acacac;}
 /* 돌아가기 버튼 강조 (힌트 보는 중일 때) */
 .back-btn.highlight {
     background-color: #ff4444;

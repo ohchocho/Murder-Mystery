@@ -1,20 +1,19 @@
-export const GameView = ({ title, content, story1, story2, story3, story4, img, buttonText, nextStep, isLastMemory = false }) => {
+export const GameView = ({ title, content,disc, story1, story2, story3, story4, img, buttonText, nextStep, isLastMemory = false }) => {
     return `
         <div class="view">
             <h2>${title}</h2>
             ${img ? `<img src="${img}" class="clue-img">` : ''}
+            <p class="font-gray">${disc}</p>
             <div class="content-box">
+            ${story1 ? `<p>${story1}</p>` : ''}
+            ${story2 ? `<p>${story2}</p>` : ''}
+            ${story3 ? `<p>${story3}</p>` : ''}
+            <br>
+            
                 <p>${content}</p>
                 <br>
-                ${story1 ? `<p>${story1}</p>` : ''}
-                <br>
-                ${story2 ? `<p>${story2}</p>` : ''}
-                <br>
-                ${story3 ? `<p>${story3}</p>` : ''}
-                <br>
                 ${story4 ? `<p>${story4}</p>` : ''}
-            </div>
-
+            </div>            
             ${isLastMemory ? `
                 <div class="last-choice-container">
                     <div class="input-group">

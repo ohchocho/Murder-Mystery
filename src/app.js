@@ -224,13 +224,16 @@ function render() {
             
             // 배열인 char.story를 <p> 태그 문단으로 변환
             const storyContent = char.story
-                .map(line => `<p class="story-line">${line}</p>`)
-                .join('');
+            .map(line => line.replace(/<\/?[^>]+(>|$)/g, "")) // 모든 HTML 태그 제거
+            .map(line => `<p class="story-line">${line}</p>`)
+            .join('');
+
 
             html = GameView({ 
                 title: `${char.name}의 시나리오`, 
                 content: culpritNotice + storyContent, // 가공된 HTML 전달
-                // story1: char.story_desc_1, 
+                disc:`일단 속으로만 읽고 사람들에게 알려줄 내용과 숨길 내용을 추려보세요.`,
+                story1: char.story_desc_1, 
                 // story2: char.story_desc_2, 
                 // story3: char.story_desc_3, 
                 story4: char.story_desc_4, 
@@ -242,10 +245,16 @@ function render() {
         case 'TALK_0': case 'TALK_1': case 'TALK_2': case 'TALK_3':
             const tIdx = state.currentStep.split('_')[1];
             const nextMemNum = parseInt(tIdx) + 1;
+
+            const storyContent2 = char.story
+                .map(line => `<p class="story-line">${line}</p>`)
+                .join('');
+
             html = GameView({ 
                 title: tIdx === '0' ? '첫 대면 (자기소개)' :  `${tIdx}차 토론`, 
-                content: "대화 후 기억을 확인하세요.", 
-                buttonText: `기억 ${nextMemNum} 보기`, 
+                disc: `<span class="font-red"> 아래 내용은 방금 읽은 시나리오와 내용은 같지만 아주 중요한 단서가 밑줄로 표시되어 있습니다 </span><br> 이제 한 사람씩 돌아가며 자신을 소개하세요.<br>`,
+                content: storyContent2, 
+                buttonText: `과거의 기억 ${nextMemNum} 보기`, 
                 nextStep: `MEM_${nextMemNum}` 
             });
             break;
@@ -261,37 +270,38 @@ function render() {
         //     break;
 
         case 'MEM_1': case 'MEM_2': case 'MEM_3': case 'MEM_4':
-    const mIdx = state.currentStep.split('_')[1];
-    let memoryText = char.memories[mIdx-1].text;
+            const mIdx = state.currentStep.split('_')[1];
+            let memoryText = char.memories[mIdx-1].text;
 
-    // --- 기억 3단계에서 정체 공개 로직 추가 ---
-    if (mIdx === '3') {
-        const identityNotice = char.isCulprit 
-            ? `<div class="reveal-box culprit">
-                 <h3 class="reveal-title">⚠️ 진실의 확인</h3>
-                 <p class="reveal-msg culprit-alert">당신은 이 사건의 <strong>범인</strong>입니다.</p>
-                 <p style="margin: 0;"> 증거를 인멸하고 수사망을 피하십시오.</p>
-                 <br> 
-               </div>`
-            : `<div class="reveal-box innocent">
-                 <h3 class="reveal-title">🔍 진실의 확인</h3>
-                 <p class="reveal-msg innocent-alert">당신은 범인이 아니었습니다.</p>
-                 <p style="margin: 0;"> 단서를 조합해 진범을 찾아내십시오.</p>
-                 <br> 
-               </div>`;
-        
-        // 정체 안내를 기억 내용 위에 추가
-        memoryText = identityNotice + `<hr class="reveal-divider">` + memoryText;
-    }
-    // --------------------------------------
+            // --- 기억 3단계에서 정체 공개 로직 추가 ---
+            if (mIdx === '3') {
+                const identityNotice = char.isCulprit 
+                    ? `<div class="reveal-box culprit">
+                        <h3 class="reveal-title">⚠️ 진실의 확인</h3>
+                        <p class="reveal-msg culprit-alert">당신은 이 사건의 <strong>범인</strong>입니다.</p>
+                        <p style="margin: 0;"> 증거를 인멸하고 수사망을 피하십시오.</p>
+                        <br> 
+                    </div>`
+                    : `<div class="reveal-box innocent">
+                        <h3 class="reveal-title">🔍 진실의 확인</h3>
+                        <p class="reveal-msg innocent-alert">당신은 범인이 아니었습니다.</p>
+                        <p style="margin: 0;"> 단서를 조합해 진범을 찾아내십시오.</p>
+                        <br> 
+                    </div>`;
+                
+                // 정체 안내를 기억 내용 위에 추가
+                memoryText = identityNotice + `<hr class="reveal-divider">` + memoryText;
+            }
+            // --------------------------------------
 
-    html = GameView({ 
-        title: `${char.name}의 ${mIdx}번째 기억`, 
-        content: memoryText, 
-        buttonText: "다음 단계 대기", 
-        nextStep: `WAIT_${mIdx}` 
-    });
-    break;
+            html = GameView({ 
+                title: `${char.name}의 ${mIdx}번째 기억`, 
+                disc:``,
+                content: memoryText, 
+                buttonText: "다음 단계 대기", 
+                nextStep: `WAIT_${mIdx}` 
+            });
+            break;
 
         case 'WAIT_1': case 'WAIT_2': case 'WAIT_3': case 'WAIT_4':
             const wIdx = state.currentStep.split('_')[1];
