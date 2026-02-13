@@ -252,8 +252,8 @@ function render() {
 
             html = GameView({ 
                 title: tIdx === '0' ? '첫 대면 (자기소개)' :  `${tIdx}차 토론`, 
-                disc: `<span class="font-red"> 아래 내용은 방금 읽은 시나리오와 내용은 같지만 아주 중요한 단서가 밑줄로 표시되어 있습니다 </span><br> 이제 한 사람씩 돌아가며 자신을 소개하세요.<br>`,
-                content: storyContent2, 
+                disc:  tIdx === '0' ? `<span class="font-red"> 아래 내용은 방금 읽은 시나리오와 내용은 같지만 아주 중요한 단서가 밑줄로 표시되어 있습니다 </span><br> 이제 한 사람씩 돌아가며 자신을 소개하세요.<br>`:`` ,
+                content: tIdx === '0' ?  storyContent2 :`` ,
                 buttonText: `과거의 기억 ${nextMemNum} 보기`, 
                 nextStep: `MEM_${nextMemNum}` 
             });
